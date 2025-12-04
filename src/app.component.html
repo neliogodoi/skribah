@@ -1,0 +1,53 @@
+
+@if (!authService.currentUser()) {
+  <app-auth-gate></app-auth-gate>
+} @else {
+  <div class="flex flex-col h-screen bg-gray-100">
+    <!-- Navbar -->
+    <app-passage-selector 
+      (onLoad)="loadData($event)" 
+      (onLangChange)="updateLanguage($event)"
+      (logout)="logout()">
+    </app-passage-selector>
+
+    <!-- Main Content Area -->
+    <div class="flex flex-1 overflow-hidden relative">
+      
+      <!-- Scrollable Container -->
+      <main class="flex-1 h-full overflow-hidden">
+        <app-verse-grid 
+          [verses]="bibleService.currentVerses()"
+          [loading]="bibleService.isLoading()"
+          [language]="selectedLanguage()"
+          (onOpenDrawer)="openDrawer($event)">
+        </app-verse-grid>
+      </main>
+
+      <!-- Side Drawer Overlay (Mobile) -->
+      @if (isDrawerOpen()) {
+        <div 
+          (click)="closeDrawer()"
+          class="absolute inset-0 bg-black/20 z-40 md:hidden backdrop-blur-sm">
+        </div>
+      }
+
+      <!-- Side Drawer -->
+      <div 
+        class="absolute top-0 right-0 bottom-0 z-50 transform transition-transform duration-300 ease-in-out shadow-2xl h-full"
+        [class.translate-x-0]="isDrawerOpen()"
+        [class.translate-x-full]="!isDrawerOpen()">
+        @if (selectedVerse(); as verse) {
+           <app-verse-drawer 
+             [verseId]="verse.id" 
+             [verseRef]="verse.ref"
+             (close)="closeDrawer()">
+           </app-verse-drawer>
+        }
+      </div>
+
+    </div>
+
+    <!-- Sermon Footer -->
+    <app-sermon-panel></app-sermon-panel>
+  </div>
+}

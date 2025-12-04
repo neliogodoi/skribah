@@ -1,0 +1,5 @@
+{
+  "name": "Exegesis Pro",
+  "description": "A professional Bible study tool featuring multi-version comparison, interlinear original text analysis, personal notes, and sermon sketching. Built with Angular and Tailwind.",
+  "requestFramePermissions": []
+}
