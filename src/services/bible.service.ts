@@ -23,6 +23,9 @@ export class BibleService {
   currentVerses = signal<VerseData[]>([]);
   isLoading = signal(false);
 
+  // API Token provided by user
+  private readonly API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHIiOiJUaHUgRGVjIDA0IDIwMjUgMTE6MTk6MzYgR01UKzAwMDAubmVsaW9hcHBAZ21haWwuY29tIiwiaWF0IjoxNzY0ODQ3MTc2fQ.J_UKW60gcddcFGrQRxe05cQRNznxM_G0ExfrBQtTA2c';
+
   // Mapping generic codes to abibliadigital abbreviations
   private bookMap: Record<string, string> = {
     'GEN': 'gn', 'EXO': 'ex', 'LEV': 'lv', 'NUM': 'nm', 'DEU': 'dt',
@@ -71,7 +74,7 @@ export class BibleService {
       if (length === 0 && bookCode === 'GEN' && chapter === 1) {
          length = 3; // Show first 3 verses as demo
          usingFallback = true;
-         console.warn('API Rate limited. Using fallback data for Genesis 1.');
+         console.warn('API Rate limited or failed. Using fallback data for Genesis 1.');
       }
       
       const newVerses: VerseData[] = [];
@@ -122,7 +125,12 @@ export class BibleService {
 
   private async fetchApi(bookAbbrev: string, chapter: number, version: string) {
     try {
-      const response = await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/${bookAbbrev}/${chapter}`);
+      const response = await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/${bookAbbrev}/${chapter}`, {
+        headers: {
+          'Authorization': `Bearer ${this.API_TOKEN}`,
+          'Content-Type': 'application/json'
+        }
+      });
       if (!response.ok) {
         return [];
       }

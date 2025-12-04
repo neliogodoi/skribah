@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
     <div class="bg-white border-b border-gray-200 px-4 py-3 flex flex-col md:flex-row items-center gap-4 shadow-sm z-20 relative">
       <div class="flex items-center gap-2 text-brand-700 font-bold text-xl mr-4">
         <span class="material-icons-outlined">menu_book</span>
-        <span class="hidden md:inline">Exegesis Pro</span>
+        <span class="hidden md:inline">Skribah</span>
       </div>
 
       <div class="flex-1 flex flex-wrap items-center gap-2 w-full md:w-auto">

@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
       <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
         <div class="text-center mb-8">
           <span class="material-icons-outlined text-6xl text-brand-600 mb-2">menu_book</span>
-          <h1 class="text-3xl font-bold text-gray-800">Exegesis Pro</h1>
+          <h1 class="text-3xl font-bold text-gray-800">Skribah</h1>
           <p class="text-gray-500 mt-2">Professional Bible Study Tool</p>
         </div>
 
@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
               type="text" 
               [(ngModel)]="username" 
               (keyup.enter)="handleLogin()"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition"
+              class="w-full px-4 py-2 bg-white text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition placeholder-gray-400"
               placeholder="e.g. John Doe"
             />
           </div>
